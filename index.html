@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Weather</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>My Weather</h1>
+        <div class="search-box">
+            <input type="text" id="location" placeholder="Enter location">
+            <button id="search">Search</button>
+        </div>
+        <div class="tabs">
+            <button id="today-tab" class="tab active">Today</button>
+            <button id="forecast-tab" class="tab">5-day Forecast</button>
+        </div>
+
+        <div id="today" class="tab-content">
+            <h2 id="city-name"></h2>
+            <p id="current-weather"></p>
+            <h3>Hourly</h3>
+            <table id="hourly-weather">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Condition</th>
+                        <th>Temp (°C)</th>
+                        <th>RealFeel (°C)</th>
+                        <th>Wind (km/h)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <h3>Nearby Places</h3>
+            <table id="nearby-places">
+                <thead>
+                    <tr>
+                        <th>Place</th>
+                        <th>Temp (°C)</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Baladzhary</td>
+                        <td id="baladzhary-temp"></td>
+                        <td id="baladzhary-condition"></td>
+                    </tr>
+                    <tr>
+                        <td>Bailov</td>
+                        <td id="bailov-temp"></td>
+                        <td id="bailov-condition"></td>
+                    </tr>
+                    <tr>
+                        <td>Badamdar</td>
+                        <td id="badamdar-temp"></td>
+                        <td id="badamdar-condition"></td>
+                    </tr>
+                    <tr>
+                        <td>Cherni Gorod</td>
+                        <td id="chernigorod-temp"></td>
+                        <td id="chernigorod-condition"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="forecast" class="tab-content hidden">
+            <h2>5-Day Forecast</h2>
+            <table id="forecast-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Temp (°C)</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <h3>Hourly</h3>
+            <table id="forecast-hourly">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Condition</th>
+                        <th>Temp (°C)</th>
+                        <th>RealFeel (°C)</th>
+                        <th>Wind (km/h)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
