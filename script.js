@@ -10,27 +10,36 @@ $(document).ready(() => {
             $('#forecast').addClass('active').removeClass('hidden');
         }
     });
+
     $('#search').on('click', function () {
         const location = $('#location').val();
         if (location.trim() !== '') {
             $.get(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=8ed5a55111d9eb9e977f219ce00f630c`, (data) => {
                 $('#city-name').text(data.name);
-                $('#current-weather').text(`${data.main.temp}°C, ${data.weather[0].description}`);
+                $('#current-weather').html(`
+                    ${data.main.temp}°C, ${data.weather[0].description}
+                    <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="weather icon">
+                `);
+                
                 const hourlyWeather = $('#hourly-weather tbody');
                 hourlyWeather.empty();
                 for (let i = 0; i < 6; i++) {
                     hourlyWeather.append(`
                         <tr>
                             <td>${i * 3}:00</td>
-                            <td>${data.weather[0].main}</td>
+                            <td>${data.weather[0].main} <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="weather icon"></td>
                             <td>${data.main.temp.toFixed(1)}</td>
                             <td>${(data.main.feels_like).toFixed(1)}</td>
                             <td>${data.wind.speed.toFixed(1)}</td>
                         </tr>
                     `);
                 }
+
                 $('#baladzhary-temp').text(`${data.main.temp.toFixed(1)}`);
-                $('#baladzhary-condition').text(`${data.weather[0].description}`);
+                $('#baladzhary-condition').html(`
+                    ${data.weather[0].description}
+                    <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="weather icon">
+                `);
             });
             $.get(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=8ed5a55111d9eb9e977f219ce00f630c`, (data) => {
                 const forecastTable = $('#forecast-table tbody');
@@ -40,17 +49,21 @@ $(document).ready(() => {
                         <tr>
                             <td>${data.list[i].dt_txt.split(' ')[0]}</td>
                             <td>${data.list[i].main.temp.toFixed(1)}</td>
-                            <td>${data.list[i].weather[0].description}</td>
+                            <td>
+                                ${data.list[i].weather[0].description}
+                                <img src="https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png" alt="weather icon">
+                            </td>
                         </tr>
                     `);
                 }
+
                 const forecastHourly = $('#forecast-hourly tbody');
                 forecastHourly.empty();
                 for (let i = 0; i < 6; i++) {
                     forecastHourly.append(`
                         <tr>
                             <td>${data.list[i].dt_txt.split(' ')[1]}</td>
-                            <td>${data.list[i].weather[0].main}</td>
+                            <td>${data.list[i].weather[0].main} <img src="https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png" alt="weather icon"></td>
                             <td>${data.list[i].main.temp.toFixed(1)}</td>
                             <td>${data.list[i].main.feels_like.toFixed(1)}</td>
                             <td>${data.list[i].wind.speed.toFixed(1)}</td>
